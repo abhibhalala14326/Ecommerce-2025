@@ -9,7 +9,7 @@ Editor : VSCode
 
  --> Test the server (using Thunderclinet / postman / insomnia)
 
- ------------------------------------------------------------------------------------------------
+ -------------------  ------------------------------------------------------------------------------
 
  GET --> to get data from server  --> READ
  POST --> to create data at server  --> create
