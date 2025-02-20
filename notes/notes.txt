@@ -1,8 +1,8 @@
-Icontect application using Express  MongoDb  - devloped by - Abhishek bhalala
+Ecommerce using Express  MongoDb  - devloped by - Abhishek bhalala
 ----------------------------------------------------------------------------------------
 
-DATABASE : IContacts 
-Tables: contacts , grups 
+DATABASE : Ecommerce 
+Tables: Category , SubCategory 
 Editor : VSCode
  --> API Testing
  -------------------------------------------------------------------------------------------

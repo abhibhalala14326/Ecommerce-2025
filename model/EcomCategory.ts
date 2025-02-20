@@ -1,9 +1,9 @@
 export interface EcomCategory{
 
-    name:String;
-    description:String;
-    logo:String;
-    IsActive:Boolean;
+    category_name:String;
+    category_description:String;
+    category_logo:String;
+    category_isActive:Boolean;
     updateAt?:string;
     createAt?:String;
     
