@@ -9,6 +9,7 @@ const SubCategoryRouter: Router = Router();
  * params:not - params
  */
 
+
 SubCategoryRouter.get('/', async (request: Request, response: Response) => {
     await SubCategory.getAllSubCategory(request, response)
 })

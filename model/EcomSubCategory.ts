@@ -1,4 +1,5 @@
 export interface EcomSubCategory {
+
     _id:String;
     name: String;
     description: String;
@@ -6,4 +7,5 @@ export interface EcomSubCategory {
     isActive: Boolean;
     updateAt?: string;
     createAt?: String;
+    
 }

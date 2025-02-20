@@ -22,7 +22,6 @@ export const getAllCategory = async (request: Request, response: Response) => {
         console.error("Error :", error);
         return response.status(500).json({
             msg: "Failed to  categories",
-
         });
     }
 }

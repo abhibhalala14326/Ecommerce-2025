@@ -9,6 +9,7 @@ const CategoryRouter: Router = Router();
  * params:not - params
  */
 
+
 CategoryRouter.get('/', async (request: Request, response: Response) => {
     await Category.getAllCategory(request, response)
 })

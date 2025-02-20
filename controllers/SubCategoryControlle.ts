@@ -64,6 +64,7 @@ export const getSubCategory = async (request: Request, response: Response) => {
 export const CreateSubCategory = async(request:Request , response:Response)=>
 {
     try {
+        
         let { name, description, logo, isActive } = request.body;
 
         const newCategory: EcomSubCategory | null | undefined = await new SubCategory({
