@@ -9,7 +9,7 @@ const SubCategoryRouter: Router = Router();
  * params:not - params
  */
 
-SubCategoryRouter.get('/SubCategory', async (request: Request, response: Response) => {
+SubCategoryRouter.get('/', async (request: Request, response: Response) => {
     await SubCategory.getAllSubCategory(request, response)
 })
 
@@ -19,7 +19,7 @@ SubCategoryRouter.get('/SubCategory', async (request: Request, response: Respons
  * params:CategortID
  */
 
-SubCategoryRouter.get('/SubCategory/:id', async (request: Request, response: Response) => {
+SubCategoryRouter.get('/:id', async (request: Request, response: Response) => {
     await SubCategory.getSubCategory(request, response)
 })
 
@@ -29,7 +29,7 @@ SubCategoryRouter.get('/SubCategory/:id', async (request: Request, response: Res
  * params: name , description , logo , isActive
  */
 
-SubCategoryRouter.post('/SubCategory', async (request: Request, response: Response) => {
+SubCategoryRouter.post('/', async (request: Request, response: Response) => {
     await SubCategory.CreateSubCategory(request, response)
 })
 
@@ -39,7 +39,7 @@ SubCategoryRouter.post('/SubCategory', async (request: Request, response: Respon
  * params: name , description , logo , isActive  ,SubCategoryID
  */
 
-SubCategoryRouter.put("/SubCategory/:id" , async(request:Request , res:Response)=>
+SubCategoryRouter.put("/:id" , async(request:Request , res:Response)=>
 {
     await SubCategory.UpdateSubCategory(request,response)
 })
@@ -51,7 +51,7 @@ SubCategoryRouter.put("/SubCategory/:id" , async(request:Request , res:Response)
  */
 
 
-SubCategoryRouter.put("/SubCategory/:id", async (request: Request, res: Response) => {
+SubCategoryRouter.delete("/:id", async (request: Request, res: Response) => {
     await SubCategory.DeleteSubCategory(request, response)
 })
 

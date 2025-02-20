@@ -1,6 +1,5 @@
 import { Router, Request, Response, response } from "express";
 import * as Category from '../controllers/CategoryController'
-import { request } from "node:http";
 
 const CategoryRouter: Router = Router();
 
@@ -10,7 +9,7 @@ const CategoryRouter: Router = Router();
  * params:not - params
  */
 
-CategoryRouter.get('/category', async (request: Request, response: Response) => {
+CategoryRouter.get('/', async (request: Request, response: Response) => {
     await Category.getAllCategory(request, response)
 })
 
@@ -20,7 +19,7 @@ CategoryRouter.get('/category', async (request: Request, response: Response) => 
  * params:CategortID
  */
 
-CategoryRouter.get('/category/:id', async (request: Request, response: Response) => {
+CategoryRouter.get('/:id', async (request: Request, response: Response) => {
     await Category.getCategory(request, response)
 })
 
@@ -30,7 +29,7 @@ CategoryRouter.get('/category/:id', async (request: Request, response: Response)
  * params: name , description , logo , isActive
  */
 
-CategoryRouter.post('/category', async (request: Request, response: Response) => {
+CategoryRouter.post('/', async (request: Request, response: Response) => {
     await Category.CreateCategory(request, response)
 })
 
@@ -40,7 +39,7 @@ CategoryRouter.post('/category', async (request: Request, response: Response) =>
  * params: name , description , logo , isActive  ,CategoryID
  */
 
-CategoryRouter.put("/category/:id" , async(request:Request , res:Response)=>
+CategoryRouter.put("/:id" , async(request:Request , res:Response)=>
 {
     await Category.UpdateCategory(request,response)
 })
@@ -52,7 +51,7 @@ CategoryRouter.put("/category/:id" , async(request:Request , res:Response)=>
  */
 
 
-CategoryRouter.put("/category/:id", async (request: Request, res: Response) => {
+CategoryRouter.delete("/:id", async (request: Request, res: Response) => {
     await Category.DeleteCategory(request, response)
 })
 

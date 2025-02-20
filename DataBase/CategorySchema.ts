@@ -10,4 +10,4 @@ const CatagorySchema = new Schema<EcomCategory>({
 
 }, { timestamps: true })
 
-export const Category = mongoose.model<EcomCategory>("Catagory", CatagorySchema)
+export const Category = mongoose.model<EcomCategory>("catagory", CatagorySchema)

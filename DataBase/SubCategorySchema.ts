@@ -9,4 +9,4 @@ const SubCategorySchema = new Schema<EcomSubCategory>({
 
 },{timestamps:true})
 
-export const SubCategory = mongoose.model<EcomSubCategory>("SubCategory" , SubCategorySchema)
+export const SubCategory = mongoose.model<EcomSubCategory>("SubCategory", SubCategorySchema)

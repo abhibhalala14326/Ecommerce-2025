@@ -15,6 +15,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
+// Routers
+import SubCategoryRouter from "./router/subCategoryRouter";
+import CategoryRouter from "./router/CategoryRouter";
+
+app.use('/category' , CategoryRouter)
+app.use('/subCategory' , SubCategoryRouter)
 
 
 if (port) {
