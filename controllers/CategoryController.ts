@@ -65,10 +65,10 @@ export const getCategory = async (request: Request, response: Response) => {
 export const CreateCategory = async(request:Request , response:Response)=>
 {
     try {
-        let { category_name, category_description, category_logo, category_isActive } = request.body;
+        let { category_name, category_description, category_logo, isActive } = request.body;
 
         const newCategory: EcomCategory | null | undefined = await new Category({
-            category_name, category_description, category_logo, category_isActive
+            category_name, category_description, category_logo, isActive
         }).save()
         return response.status(201).json({
                 data: newCategory,
@@ -87,7 +87,7 @@ export const CreateCategory = async(request:Request , response:Response)=>
 /**
  * usage : Update a Category 
  * methods:PUT,
- * params:category_name , category_description , category_logo , category_isActive , CategoryID
+ * params:category_name , category_description , category_logo , isActive , CategoryID
  * url : http://127.0.0.1:6666/category/categoryID
  * 
  */
@@ -106,10 +106,10 @@ export const UpdateCategory = async(request:Request , response:Response)=>
         }
 
         // Update the category
-        let { category_name, category_description, category_logo, category_isActive } = request.body;
+        let { category_name, category_description, category_logo, isActive } = request.body;
 
         const theUpdateCategoty: EcomCategory | null | undefined = await Category.findByIdAndUpdate(id,
-            { category_name, category_description, category_logo, category_isActive },
+            { category_name, category_description, category_logo, isActive },
             { new: true }
         )
 
@@ -148,12 +148,11 @@ export const DeleteCategory = async(request:Request , response:Response)=>
                 msg: "Category not found",
             });
         }
-        const theDeleteCategory: EcomCategory | null | undefined = await Category.findByIdAndDelete(id)
+        
+        await Category.findByIdAndDelete(id)
 
-        return response.status(202).json({
-            data: null,
-            msg: "Category is Deleted"
-        })
+   
+
 
     } catch (error) {
         console.error("Error deleting Category:", error);

@@ -1,11 +1,12 @@
-export interface EcomSubCategory {
+import mongoose from "mongoose";
 
-    _id:String;
+export interface EcomSubCategory {
+   
+    category_id:mongoose.Types.ObjectId;
     name: String;
     description: String;
     logo: String;
     isActive: Boolean;
     updateAt?: string;
     createAt?: String;
-    
 }

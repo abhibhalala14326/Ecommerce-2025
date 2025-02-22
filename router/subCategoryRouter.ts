@@ -46,7 +46,7 @@ SubCategoryRouter.post('/', async (request: Request, response: Response) => {
  * url : http://127.0.0.1:6666/subCategory/subCategory
  */
 
-SubCategoryRouter.put("/:id" , async(request:Request , res:Response)=>
+SubCategoryRouter.put("/:id" , async(request:Request , response:Response)=>
 {
     await SubCategory.UpdateSubCategory(request,response)
 })
@@ -59,7 +59,7 @@ SubCategoryRouter.put("/:id" , async(request:Request , res:Response)=>
  */
 
 
-SubCategoryRouter.delete("/:id", async (request: Request, res: Response) => {
+SubCategoryRouter.delete("/:id", async (request: Request, response: Response) => {
     await SubCategory.DeleteSubCategory(request, response)
 })
 

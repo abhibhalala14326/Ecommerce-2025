@@ -12,15 +12,18 @@ const hostname: string = "127.0.0.1";
 
 const app: Application = express();
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 // Routers
 import SubCategoryRouter from "./router/subCategoryRouter";
 import CategoryRouter from "./router/CategoryRouter";
+import ProductRouter from "./router/ProductRouter";
 
 app.use('/category' , CategoryRouter)
 app.use('/subCategory' , SubCategoryRouter)
+app.use("/product" , ProductRouter)
+
 
 
 if (port) {

@@ -3,12 +3,11 @@ import { EcomSubCategory } from '../model/EcomSubCategory'
 
 const SubCategorySchema = new Schema<EcomSubCategory>(
     {
-        name: {
-            type: String, required: true, lowercase: true
-        },
-        description: { type: String, required: true, trim: true },
+        category_id: { type: Schema.Types.ObjectId, ref:"Category" },
+        name: {type: String, required: true, lowercase: true},
+        description: { type: String, trim: true },
         logo: { type: String },
-        isActive: { type: Boolean }
+        isActive: { type: Boolean , default:true }
 
     }, { timestamps: true })
 

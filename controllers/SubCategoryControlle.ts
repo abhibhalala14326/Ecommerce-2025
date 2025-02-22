@@ -1,7 +1,6 @@
 import { SubCategory } from "../DataBase/SubCategorySchema";
-import e, { Request, Response } from "express";
+import  { Request, Response } from "express";
 import { EcomSubCategory } from "../model/EcomSubCategory";
-import { subscribe } from "diagnostics_channel";
 
 
 /**
@@ -40,7 +39,7 @@ export const getAllSubCategory = async (request: Request, response: Response) =>
  */
 export const getSubCategory = async (request: Request, response: Response) => {
     try {
-        let {id} = request.params
+        let { id } = request.params
         const thegetCategory: EcomSubCategory[] | null | undefined = await SubCategory.findById(id)
 
         return response.status(200).json({
@@ -64,20 +63,19 @@ export const getSubCategory = async (request: Request, response: Response) => {
  * url : http://127.0.0.1:6666/subCategory
  */
 
-export const CreateSubCategory = async(request:Request , response:Response)=>
-{
+export const CreateSubCategory = async (request: Request, response: Response) => {
     try {
-        
-        let { name, description, logo, isActive } = request.body;
 
-        const newCategory: EcomSubCategory | null | undefined = await new SubCategory({
-            name: name, description: description, logo: logo, isActive: isActive
-        }).save()
+       let {category_id , name , description , isActive , logo} = request.body
+
+       const newCategory:EcomSubCategory | null | undefined = await new SubCategory({
+        category_id , name , description , isActive , logo
+       }).save()
 
         return response.status(201).json(
             {
                 data: newCategory,
-                msg:'SubCategory create successfully'
+                msg: 'SubCategory create successfully'
             }
         )
     } catch (error) {
@@ -86,7 +84,7 @@ export const CreateSubCategory = async(request:Request , response:Response)=>
             msg: "Failed to create Subcategory",
         });
     }
-    
+
 }
 
 /**
@@ -96,8 +94,8 @@ export const CreateSubCategory = async(request:Request , response:Response)=>
  * url : http://127.0.0.1:6666/subCategory/subCategory
  */
 
-export const UpdateSubCategory = async(request:Request , response:Response)=>
-{
+export const UpdateSubCategory = async (request: Request, response: Response) => {
+
     try {
         let { id } = request.params;
 
@@ -110,27 +108,30 @@ export const UpdateSubCategory = async(request:Request , response:Response)=>
         }
 
         // Update the category
-        let { name, description, isActive, logo } = request.body;
+        let { category_id, name, description, isActive, logo } = request.body;
 
         const theUpdateCategoty: EcomSubCategory | null | undefined = await SubCategory.findByIdAndUpdate(id,
-            { name, description, logo, isActive },
+            { name, description, logo, isActive, category_id },
             { new: true }
         )
 
         return response.status(201).json({
-            data:theUpdateCategoty,
-            msg:'SubCategory updated successfully'
+            data: theUpdateCategoty,
+            msg: 'SubCategory updated successfully'
         })
     } catch (error) {
         console.error("Error updating category:", error);
         return response.status(500).json({
             msg: "Failed to update Subcategory",
-           
+
         });
     }
-   
+
 
 }
+
+
+
 
 /**
  * usage : Delete SubCategory 
@@ -139,8 +140,8 @@ export const UpdateSubCategory = async(request:Request , response:Response)=>
  * url : http://127.0.0.1:6666/subCategoryID
  */
 
-export const DeleteSubCategory = async(request:Request , response:Response)=>
-{
+export const DeleteSubCategory = async (request: Request, response: Response) => {
+
     try {
         let { id } = request.params
 
@@ -151,7 +152,7 @@ export const DeleteSubCategory = async(request:Request , response:Response)=>
                 msg: "SubCategory not found",
             });
         }
-        const theDeleteSubCategory: EcomSubCategory | null | undefined = await SubCategory.findByIdAndDelete(id)
+     await SubCategory.findByIdAndDelete(id)
 
         return response.status(202).json({
             data: null,
@@ -162,8 +163,8 @@ export const DeleteSubCategory = async(request:Request , response:Response)=>
         console.error("Error deleting subcategory:", error);
         return response.status(500).json({
             msg: "Failed to delete SubCategory",
-            
+
         });
     }
-   
+
 }

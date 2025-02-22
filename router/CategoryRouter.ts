@@ -1,4 +1,4 @@
-import { Router, Request, Response, response } from "express";
+import { Router, Request, Response } from "express";
 import * as Category from '../controllers/CategoryController'
 
 const CategoryRouter: Router = Router();
@@ -36,6 +36,8 @@ CategoryRouter.get('/:id', async (request: Request, response: Response) => {
 
 CategoryRouter.post('/', async (request: Request, response: Response) => {
     await Category.CreateCategory(request, response)
+    
+    
 })
 
 /**
@@ -46,8 +48,10 @@ CategoryRouter.post('/', async (request: Request, response: Response) => {
  * 
  */
 
-CategoryRouter.put("/:id", async (request: Request, res: Response) => {
+CategoryRouter.put("/:id", async (request: Request, response: Response) => {
     await Category.UpdateCategory(request, response)
+    console.log("put in category" , request);
+    
 })
 
 
@@ -60,7 +64,7 @@ CategoryRouter.put("/:id", async (request: Request, res: Response) => {
  */
 
 
-CategoryRouter.delete("/:id", async (request: Request, res: Response) => {
+CategoryRouter.delete("/:id", async (request: Request, response: Response) => {
     await Category.DeleteCategory(request, response)
 })
 
