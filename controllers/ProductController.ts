@@ -1,9 +1,6 @@
 import { Request, response, Response } from "express";
 import { EcomProduct } from "../model/EcomProduct";
 import { Product } from "../DataBase/ProductSchema";
-import { create } from "domain";
-import { request } from "http";
-import exp from "constants";
 import mongoose from "mongoose";
 
 
