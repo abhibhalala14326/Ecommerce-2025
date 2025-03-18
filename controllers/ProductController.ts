@@ -1,8 +1,8 @@
-import { Request, response, Response } from "express";
+import { NextFunction, Request, response, Response } from "express";
 import { EcomProduct } from "../model/EcomProduct";
 import { Product } from "../DataBase/ProductSchema";
 import mongoose from "mongoose";
-
+import { v2 as cloudinary } from "cloudinary"
 
 /**
  * usage:Get All Product
@@ -60,31 +60,70 @@ export const getProduct = async (request: Request, response: Response) => {
  */
 
 export const createProduct = async (request: Request, response: Response) => {
+
     try {
+
         let { SubCategory_id, product_name,
-            product_image, product_images,
             product_description, product_brand,
             product_price, product_quantity, isActive
         } = request.body
 
-        if (!SubCategory_id || !product_name || !product_description || !product_image || product_brand) {
-            return response.status(400).json({ error: "Missing required fields" });
+
+        console.log(process.env.CLOUDINARY_API_KEY);
+
+        // Img Upload in Cloudinary
+
+        const files = request.files as { [fileName: string]: Express.Multer.File[] };
+
+        if (!files) {
+            return response.status(400).json({ error: "Please upload  image" });
+
         }
+
+        // single image upload
+
+        const singleFile = files["singelImg"][0];
+        const singleProduct = await cloudinary.uploader.upload(singleFile.path, {
+            resource_type: "auto",
+        })
+        console.log(singleProduct.secure_url);
+
+        // multiple image upload
+
+        const multipleImages = files["Multipleimg"];
+
+        let productImages: string[] = []
+
+        for (const img of multipleImages) {
+            const multipleImagesProduct = await cloudinary.uploader.upload(img.path, {
+                resource_type: "auto",
+            })
+            productImages.push( multipleImagesProduct.secure_url )
+
+        }
+
+
+        // Create a New Product
         const theCreateProduct: EcomProduct | null | undefined = await new Product({
             SubCategory_id, product_name,
-            product_image, product_images,
+            product_image: singleProduct.secure_url || "", product_images: productImages || "",
             product_description, product_brand,
             product_price, product_quantity, isActive
         }).save()
 
+
+
         return response.status(201).json(theCreateProduct)
     } catch (error) {
+        console.log(error);
 
         return response.status(500).json({ error: `Server error  : , ${error}` });
 
     }
 
 }
+
+
 
 /**
  * usage : Update a Product
@@ -135,8 +174,8 @@ export const DeleteProduct = async (request: Request, response: Response) => {
     try {
         let { id } = request.params;
 
-        
-        const deletedProduct  = await Product.findByIdAndDelete(id)
+
+        const deletedProduct = await Product.findByIdAndDelete(id)
 
         if (!deletedProduct) {
             return response.status(400).json({ error: "Product not found" });

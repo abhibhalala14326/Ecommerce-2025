@@ -2,7 +2,7 @@ Ecommerce using Express  MongoDb  - devloped by - Abhishek bhalala
 ----------------------------------------------------------------------------------------
 
 DATABASE : Ecommerce 
-Tables: Category , SubCategory  , Product
+Tables: Category , SubCategory  , Product , user
 Editor : VSCode
  --> API Testing
  -------------------------------------------------------------------------------------------

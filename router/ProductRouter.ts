@@ -1,8 +1,10 @@
-import { Router , Request,Response } from "express";
+import { Router, Request, Response } from "express";
 import * as Product from '../controllers/ProductController'
+import { log } from "console";
+import { upload } from "../Multer/upload";
 
 
-const ProductRouter:Router = Router()
+const ProductRouter: Router = Router()
 
 /**
  * usage:Get All Product
@@ -11,9 +13,8 @@ const ProductRouter:Router = Router()
  * params:not-params
  */
 
-ProductRouter.get('/' , async(request:Request , response:Response)=>
-{
-    await Product.getAllProduct(request ,response)
+ProductRouter.get('/', async (request: Request, response: Response) => {
+    await Product.getAllProduct(request, response)
 })
 
 
@@ -40,9 +41,12 @@ ProductRouter.get("/:id", async (request: Request, response: Response) => {
  */
 
 
-ProductRouter.post("/" , async(request:Request , response:Response)=>
-{
-    await Product.createProduct(request , response)
+ProductRouter.post("/", upload.fields([
+    { name: 'singelImg', maxCount: 1 },
+    { name: 'Multipleimg', maxCount: 8 }
+]) ,  async (request: Request, response: Response) => {
+    console.log(request);
+    await Product.createProduct(request, response)
 })
 
 /**
@@ -55,9 +59,8 @@ ProductRouter.post("/" , async(request:Request , response:Response)=>
  * url:http://127.0.0.1:6666/product/productID
  */
 
-ProductRouter.put("/:id" , async(request:Request , response:Response)=>
-{
-    await Product.UpdateProduct(request , response)
+ProductRouter.put("/:id", async (request: Request, response: Response) => {
+    await Product.UpdateProduct(request, response)
 })
 
 
@@ -68,8 +71,8 @@ ProductRouter.put("/:id" , async(request:Request , response:Response)=>
  * url:http://127.0.0.1:6666/product/productID
  */
 
-ProductRouter.delete("/:id" , async(request:Request , response:Response)=>{
-    await Product.DeleteProduct(request,response)
+ProductRouter.delete("/:id", async (request: Request, response: Response) => {
+    await Product.DeleteProduct(request, response)
 })
 
 
