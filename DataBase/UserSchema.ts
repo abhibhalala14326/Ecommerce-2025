@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { EComUser } from "../model/EcomUser";
+import CryptoJS from "crypto-js";
 
 const UserSchems = new Schema<EComUser>({
     userName:{type:String , trim:true , required:true},
@@ -10,3 +11,7 @@ const UserSchems = new Schema<EComUser>({
 },{timestamps:true})
 
 export const User = mongoose.model<EComUser>("User" , UserSchems)
+
+const reserPssword = (password:string)=>{
+    
+}

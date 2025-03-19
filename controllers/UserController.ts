@@ -1,4 +1,4 @@
-import { Request , Response } from "express";
+import { NextFunction, Request , Response } from "express";
 import { validationResult } from "express-validator";
 import { User } from "../DataBase/UserSchema";
 import bcryptjs from "bcryptjs"
@@ -151,5 +151,18 @@ export const  UserLogin = async(request:Request , response:Response)=>
 
 export const UserLogout = async(request:Request , response:Response)=>
 {
+
+}
+
+
+export const forgetPassword = async(request:Request , response:Response , next:NextFunction)=>{
+    const user = await User.findOne({email:request.body.email})
+
+    if (!user) {
+        return response.status(404).json({
+            data:null,
+            msg:"User not found"
+        })
+    }
 
 }

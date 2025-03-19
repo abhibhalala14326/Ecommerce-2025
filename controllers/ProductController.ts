@@ -3,6 +3,7 @@ import { EcomProduct } from "../model/EcomProduct";
 import { Product } from "../DataBase/ProductSchema";
 import mongoose from "mongoose";
 import { v2 as cloudinary } from "cloudinary"
+import fs from "fs";
 
 /**
  * usage:Get All Product
@@ -88,6 +89,8 @@ export const createProduct = async (request: Request, response: Response) => {
         })
         console.log(singleProduct.secure_url);
 
+        fs.unlinkSync(singleFile.path)
+
         // multiple image upload
 
         const multipleImages = files["Multipleimg"];
@@ -99,10 +102,11 @@ export const createProduct = async (request: Request, response: Response) => {
                 resource_type: "auto",
             })
             productImages.push( multipleImagesProduct.secure_url )
+            fs.unlinkSync(img.path)
 
         }
 
-
+       
         // Create a New Product
         const theCreateProduct: EcomProduct | null | undefined = await new Product({
             SubCategory_id, product_name,
